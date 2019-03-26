@@ -1,8 +1,8 @@
 package de.subhan.sgd.model;
 
 public class GridPoint {
-    Integer level;
-    Integer index;
+    private int level;
+    private int index;
 
     public GridPoint(Integer level, Integer index){
         this.level = level;

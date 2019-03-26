@@ -32,6 +32,13 @@ public class ClassificatorFactory {
         return readFromInputStream(resourceInputStream);
     }
 
+    public static String getContent(String filePath) throws IOException{
+        Resource resource = new ClassPathResource(filePath);
+        InputStream resourceInputStream = resource.getInputStream();
+
+        return readFromInputStream(resourceInputStream);
+    }
+
     private static String readFromInputStream(InputStream inputStream)
             throws IOException {
         StringBuilder resultStringBuilder = new StringBuilder();
@@ -89,7 +96,7 @@ public class ClassificatorFactory {
             gridPoints.add(point);
 
             if (j % 5000 == 0) {
-//                System.out.println("Halftime");
+                // System.out.println("Halftime");
             }
         }
 
@@ -109,7 +116,7 @@ public class ClassificatorFactory {
                     try {
                         surpluses.add(Double.parseDouble(vector[i]));
                     } catch (Exception e) {
-//                        System.err.println("doesnt work");
+                        //System.err.println("doesnt work");
                     }
                 }
             }

@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
+import java.io.*;
 
 
 @RestController
@@ -57,7 +61,7 @@ public class Controller {
 
 
 
-    @PostMapping(path = "getNumber")
+    @PostMapping(path = "predict")
     public ServiceResponse index(
             @RequestBody ServiceRequest request
     ) {
@@ -73,6 +77,8 @@ public class Controller {
         classificator8.setLabel(8);
         classificator9.setLabel(9);
 
+
+
         //set instances
         classificator0.setInstances(4152);
         classificator1.setInstances(4714);
@@ -86,6 +92,8 @@ public class Controller {
         classificator9.setInstances(4138);
 
 
+
+
         List<Double> point = request.getPoint();
 
         // check if request is viable
@@ -97,19 +105,20 @@ public class Controller {
 
         List<Classificator> classificatorList = new ArrayList<Classificator>();
 
+
+        //Number that should NOT be predicted can be commented out here
         classificatorList.add(classificator0);
-        classificatorList.add(classificator1);
+        //classificatorList.add(classificator1);
         classificatorList.add(classificator2);
-        classificatorList.add(classificator3);
-        classificatorList.add(classificator4);
-        classificatorList.add(classificator5);
+        //classificatorList.add(classificator3);
+        //classificatorList.add(classificator4);
+        //classificatorList.add(classificator5);
         classificatorList.add(classificator6);
-        classificatorList.add(classificator7);
-        classificatorList.add(classificator8);
-        classificatorList.add(classificator9);
+        //classificatorList.add(classificator7);
+        //classificatorList.add(classificator8);
+        //classificatorList.add(classificator9);
 
         Evaluator prediction = evalClassificator(classificatorList, point);
-
 
         return new ServiceResponse(prediction.getLabel());
     }
@@ -117,23 +126,28 @@ public class Controller {
 
     private Evaluator evalClassificator(List<Classificator> classificatorList, List<Double> point) {
         List<Evaluator> evaluatorList = new ArrayList<Evaluator>();
+        List<Double> classDensityList = new ArrayList<Double>();
 
         //get all numinstances
         int sumInstances = 0;
         for (int i = 0; i < classificatorList.size(); i++){
             sumInstances += classificatorList.get(i).getInstances();
+
         }
 
         for(int i = 0; i < classificatorList.size(); i++){
             Evaluator tmp = new Evaluator();
             double classDensity = evalSparseGrid(classificatorList.get(i), point);
-            double prior = (double) classificatorList.get(i).getInstances() /sumInstances;
+            double prior = (double) classificatorList.get(i).getInstances() / sumInstances;
             double density = prior * classDensity;
             tmp.setValue(density);
-            tmp.setLabel(i);
+            tmp.setLabel(classificatorList.get(i).getLabel());
+            tmp.setClassDensity(classDensity); // delete later
             evaluatorList.add(tmp);
+            classDensityList.add(classDensity);
         }
 
+        //e.getClassDensity() for no prior ||| e.getvalue for prior
         Evaluator result = Collections.max(evaluatorList, Comparator.comparing(e -> e.getValue()));
 
         return result;
@@ -189,5 +203,58 @@ public class Controller {
         double valueOne = 1 - Math.abs(x);
         double valueTwo = 0;
         return Math.max(valueOne, valueTwo);
+    }
+
+    private List<Double> stringToList(String string){
+        List<Double> output = new ArrayList<Double>();
+
+        Scanner s = new Scanner(string);
+
+
+
+        return output;
+    }
+
+    // use this in serviceresponse to eval datasets
+    private void evaldataset(){
+
+        /* *************TEST********************
+        List<List<Double>> random_data = new ArrayList<List<Double>>();
+
+        String test = "";
+        try {
+            test = ClassificatorFactory.getContent("test_data/tablet_2_dataset.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("ERROR in parsing string");
+        }
+
+        Scanner s = new Scanner(test);
+        while (s.hasNextLine()) {
+            List<Double> data = new ArrayList<Double>();
+            String tmp2 = s.nextLine();
+            String[] vector2 = tmp2.split("(,)|(\\[)|(\\])");
+            for(int i = 0; i < vector2.length; i++){
+                if (vector2[i] != null && vector2[i].length() > 0) {
+                    data.add(Double.parseDouble(vector2[i]));
+                }
+            }
+            random_data.add(data);
+        }
+
+
+        try (PrintWriter out = new PrintWriter("EVAL_2_tablet_dataset_8_server.txt")) {
+            for(int i = 0; i <random_data.size(); i++){
+                Evaluator compare = evalClassificator(classificatorList, random_data.get(i));
+                double print = compare.getClassDensity();
+                String printString = Double.toString(print);
+                System.out.println(i);
+                out.println(printString);
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // ***** END TEST******************/
     }
 }
