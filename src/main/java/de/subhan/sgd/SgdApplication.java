@@ -19,12 +19,12 @@ public class SgdApplication {
         return classificator0;
     }
 
-    @Bean(name = "Classificator1")
+    /*@Bean(name = "Classificator1")
     public Classificator createClassificator1() {
         Classificator classificator1 = ClassificatorFactory.createClassificator("1");
         System.out.println("Classificator1 Done");
         return classificator1;
-    }
+    }*/
 
     @Bean(name = "Classificator2")
     public Classificator createClassificator2() {
@@ -33,7 +33,7 @@ public class SgdApplication {
         return classificator2;
     }
 
-    @Bean(name = "Classificator3")
+    /*@Bean(name = "Classificator3")
     public Classificator createClassificator3() {
         Classificator classificator3 = ClassificatorFactory.createClassificator("3");
         System.out.println("Classificator3 Done");
@@ -52,7 +52,7 @@ public class SgdApplication {
         Classificator classificator5 = ClassificatorFactory.createClassificator("5");
         System.out.println("Classificator5 Done");
         return classificator5;
-    }
+    }*/
 
     @Bean(name = "Classificator6")
     public Classificator createClassificator6() {
@@ -61,7 +61,7 @@ public class SgdApplication {
         return classificator6;
     }
 
-    @Bean(name = "Classificator7")
+    /*@Bean(name = "Classificator7")
     public Classificator createClassificator7() {
         Classificator classificator7 = ClassificatorFactory.createClassificator("7");
         System.out.println("Classificator7 Done");
@@ -80,7 +80,7 @@ public class SgdApplication {
         Classificator classificator9 = ClassificatorFactory.createClassificator("9");
         System.out.println("Classificator9 Done");
         return classificator9;
-    }
+    }*/
 
 }
 

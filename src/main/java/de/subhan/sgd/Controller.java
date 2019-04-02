@@ -23,15 +23,15 @@ public class Controller {
     @Autowired
     Classificator classificator0;
 
-    @Qualifier("Classificator1")
+    /*@Qualifier("Classificator1")
     @Autowired
-    Classificator classificator1;
+    Classificator classificator1;*/
 
     @Qualifier("Classificator2")
     @Autowired
     Classificator classificator2;
 
-    @Qualifier("Classificator3")
+    /*@Qualifier("Classificator3")
     @Autowired
     Classificator classificator3;
 
@@ -41,13 +41,13 @@ public class Controller {
 
     @Qualifier("Classificator5")
     @Autowired
-    Classificator classificator5;
+    Classificator classificator5;*/
 
     @Qualifier("Classificator6")
     @Autowired
     Classificator classificator6;
 
-    @Qualifier("Classificator7")
+    /*@Qualifier("Classificator7")
     @Autowired
     Classificator classificator7;
 
@@ -57,7 +57,7 @@ public class Controller {
 
     @Qualifier("Classificator9")
     @Autowired
-    Classificator classificator9;
+    Classificator classificator9;*/
 
 
 
@@ -67,29 +67,29 @@ public class Controller {
     ) {
         //set labels
         classificator0.setLabel(0);
-        classificator1.setLabel(1);
+        //classificator1.setLabel(1);
         classificator2.setLabel(2);
-        classificator3.setLabel(3);
-        classificator4.setLabel(4);
-        classificator5.setLabel(5);
+        //classificator3.setLabel(3);
+        //classificator4.setLabel(4);
+        //classificator5.setLabel(5);
         classificator6.setLabel(6);
-        classificator7.setLabel(7);
-        classificator8.setLabel(8);
-        classificator9.setLabel(9);
+        //classificator7.setLabel(7);
+        //classificator8.setLabel(8);
+        //classificator9.setLabel(9);
 
 
 
         //set instances
         classificator0.setInstances(4152);
-        classificator1.setInstances(4714);
+        //classificator1.setInstances(4714);
         classificator2.setInstances(4212);
-        classificator3.setInstances(4243);
-        classificator4.setInstances(4090);
-        classificator5.setInstances(3832);
+        //classificator3.setInstances(4243);
+        //classificator4.setInstances(4090);
+        //classificator5.setInstances(3832);
         classificator6.setInstances(4143);
-        classificator7.setInstances(4360);
-        classificator8.setInstances(4117);
-        classificator9.setInstances(4138);
+        //classificator7.setInstances(4360);
+        //classificator8.setInstances(4117);
+        //classificator9.setInstances(4138);
 
 
 
